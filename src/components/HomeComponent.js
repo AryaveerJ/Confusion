@@ -10,12 +10,12 @@ import {
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 
-function RenderCard({ item, isLoading, errMess }) {
+function RenderCard({ item, isLoading, err }) {
   if (isLoading) {
     return <Loading />;
-  } else if (errMess) {
-    return <h4>{errMess}</h4>;
-  } else
+  } else if (err) {
+    return <h4>{err}</h4>;
+  } else {
     return (
       <Card>
         <CardImg src={baseUrl + item.image} alt={item.name} />
@@ -28,9 +28,11 @@ function RenderCard({ item, isLoading, errMess }) {
         </CardBody>
       </Card>
     );
+  }
 }
 
 function Home(props) {
+  console.log(props);
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -38,14 +40,14 @@ function Home(props) {
           <RenderCard
             item={props.dish}
             isLoading={props.dishesLoading}
-            errMess={props.dishesErrMess}
+            err={props.dishesErrMess}
           />
         </div>
         <div className="col-12 col-md m-1">
           <RenderCard
             item={props.promotion}
             isLoading={props.promoLoading}
-            errMess={props.promoErrMess}
+            err={props.promoErrMess}
           />
         </div>
         <div className="col-12 col-md m-1">
