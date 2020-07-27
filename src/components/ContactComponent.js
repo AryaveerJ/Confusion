@@ -8,7 +8,7 @@ import {
   Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors, actions } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -26,6 +26,14 @@ class Contact extends React.Component {
   handleSubmit(values) {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+    this.props.postFeedbackForm(
+      values.firstname,
+      values.lastname,
+      values.telnum,
+      values.email,
+      values.contactType,
+      values.message
+    );
     this.props.resetFeedbackForm();
     // event.preventDefault();
   }
@@ -78,9 +86,9 @@ class Contact extends React.Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <button className="btn btn-info">
                 <i className="fa fa-skype"></i> Skype
-              </a>
+              </button>
               <a
                 role="button"
                 className="btn btn-success"
